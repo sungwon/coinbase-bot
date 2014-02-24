@@ -16,3 +16,6 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+api_key.yml
+email_login.yml
