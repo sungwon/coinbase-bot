@@ -18,8 +18,7 @@ EMAIL_ALERT_ADDRESS = username@emaildomain.com # email address to send alerts to
 ```
 
 Additionally, 2 yaml configuration files are needed:
-email_login.yml
-api_key.yml
+email_login.yml and api_key.yml
 
 email_login.yml should look something like this:
 
@@ -29,7 +28,7 @@ email_login.yml should look something like this:
 :password: passwordforemailtosendfrom
 ```
 
-For the API key, you will have to enable one at Coinbase.com for your account and then put in the details like so:
+For the API key, you will have to enable one at Coinbase.com for your account and then put in the details to api_key.yml like so:
 ```
 ---
 :api_key: stringoflettersandnumbers
