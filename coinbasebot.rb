@@ -2,11 +2,11 @@ require 'logger'
 require 'coinbase' #gem 'coinbase'
 require 'mail' # gem 'mail'
 
-BUY_CEIL = Money.new(56500, "USD")
+BUY_CEIL = Money.new(64000, "USD")
 SELL_FLOOR = Money.new(80000, "USD")
 AUTO_BUY = true
-AUTO_SELL = true
-BUY_QUANTITY = 1
+AUTO_SELL = false
+BUY_QUANTITY = 2
 SELL_QUANTITY = 1
 
 EMAIL_ALERT_ADDRESS = 'dokkaebi@gmail.com'
@@ -51,6 +51,22 @@ def send_notice(from, subject, body)
   end
 end
 
+
+puts "Buy ceiling is at: " + BUY_CEIL.format
+puts "Sell floor is at : " + SELL_FLOOR.format
+if (AUTO_BUY) 
+  puts "Auto-buy is      : ON"
+  puts "Buy quantity is  : #{BUY_QUANTITY}" 
+else
+  puts "Auto-buy is      : OFF"
+end
+if (AUTO_SELL) 
+  puts "Auto-sell is     : ON"
+  puts "Sell quanity is  : #{SELL_QUANTITY}"
+else
+  puts "Auto-sell is     : OFF"
+end
+
 loop do
 
   begin
@@ -78,12 +94,12 @@ loop do
     end
   elsif sell_price >= SELL_FLOOR
     if AUTO_SELL
-      logger.info "Sell Price ($#{sell_price}) below target ($#{SELL_CEIL}). Selling automatically."
+      logger.info "Sell Price ($#{sell_price}) below target ($#{SELL_FLOOR}). Selling automatically."
       coinbase.sell!(SELL_QUANTITY);
       send_notice(email_address, "Auto-sell at ($#{sell_price})", "Auto-sell at ($#{sell_price})")
       break
     else  
-      logger.info "Sell Price ($#{sell_price}) below target ($#{SELL_CEIL}). Sending alert."
+      logger.info "Sell Price ($#{sell_price}) below target ($#{SELL_FLOOR}). Sending alert."
       send_notice(email_address, "High sell price ($#{sell_price})", "High sell price ($#{sell_price})")
       break
     end
