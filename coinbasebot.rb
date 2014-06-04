@@ -9,7 +9,8 @@ AUTO_SELL = false
 BUY_QUANTITY = 1
 SELL_QUANTITY = 6.5995
 
-EMAIL_ALERT_ADDRESS = 'dokkaebi@gmail.com'
+EMAIL_ALERT_ADDRESS = 'username@email.com' # your email address here
+MAIL_SERVER = 'mail@domain.com' # your mail server here
 SLEEP_SECONDS = 30 # seconds between API calls
 
 I18n.enforce_available_locales = false
@@ -34,7 +35,7 @@ email_address = email_login[:user_name]
 
 Mail.defaults do
   delivery_method :smtp, email_login.merge(
-    address:              "mail.sungwonchoe.com",
+    address:              MAIL_SERVER,
     port:                 "587",
     authentication:       :login,
     enable_starttls_auto: true,
