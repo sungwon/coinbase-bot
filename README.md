@@ -14,7 +14,8 @@ AUTO_BUY = true # if set to true, performs autobuy at buy ceiling or lower. if f
 AUTO_SELL = true # if set to true, performs autosell at sell floor or higher. if false, sends email alert
 BUY_QUANTITY = 1 # quantity in bitcoins
 SELL_QUANTITY = 1 # quantity in bitcoins
-EMAIL_ALERT_ADDRESS = username@emaildomain.com # email address to send alerts to
+EMAIL_ALERT_ADDRESS = 'username@emaildomain.com' # email address to send alerts to
+MAIL_SERVER = 'mail@domain.com' # your mail server here 
 ```
 
 Additionally, 2 yaml configuration files are needed:
