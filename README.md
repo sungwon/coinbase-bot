@@ -15,7 +15,7 @@ AUTO_SELL = true # if set to true, performs autosell at sell floor or higher. if
 BUY_QUANTITY = 1 # quantity in bitcoins
 SELL_QUANTITY = 1 # quantity in bitcoins
 EMAIL_ALERT_ADDRESS = 'username@emaildomain.com' # email address to send alerts to
-MAIL_SERVER = 'mail@domain.com' # your mail server here 
+MAIL_SERVER = 'mail.domain.com' # your mail server here 
 ```
 
 Additionally, 2 yaml configuration files are needed:
