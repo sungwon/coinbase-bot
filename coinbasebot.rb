@@ -2,12 +2,12 @@ require 'logger'
 require 'coinbase' #gem 'coinbase'
 require 'mail' # gem 'mail'
 
-BUY_CEIL = Money.new(64000, "USD")
-SELL_FLOOR = Money.new(80000, "USD")
-AUTO_BUY = true
+BUY_CEIL = Money.new(45000, "USD")
+SELL_FLOOR = Money.new(67000, "USD")
+AUTO_BUY = false
 AUTO_SELL = false
-BUY_QUANTITY = 2
-SELL_QUANTITY = 1
+BUY_QUANTITY = 1
+SELL_QUANTITY = 6.5995
 
 EMAIL_ALERT_ADDRESS = 'dokkaebi@gmail.com'
 SLEEP_SECONDS = 30 # seconds between API calls
@@ -94,12 +94,12 @@ loop do
     end
   elsif sell_price >= SELL_FLOOR
     if AUTO_SELL
-      logger.info "Sell Price ($#{sell_price}) below target ($#{SELL_FLOOR}). Selling automatically."
+      logger.info "Sell Price ($#{sell_price}) above target ($#{SELL_FLOOR}). Selling automatically."
       coinbase.sell!(SELL_QUANTITY);
       send_notice(email_address, "Auto-sell at ($#{sell_price})", "Auto-sell at ($#{sell_price})")
       break
     else  
-      logger.info "Sell Price ($#{sell_price}) below target ($#{SELL_FLOOR}). Sending alert."
+      logger.info "Sell Price ($#{sell_price}) above target ($#{SELL_FLOOR}). Sending alert."
       send_notice(email_address, "High sell price ($#{sell_price})", "High sell price ($#{sell_price})")
       break
     end
