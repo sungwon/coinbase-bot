@@ -10,7 +10,7 @@ BUY_QUANTITY = 1
 SELL_QUANTITY = 6.5995
 
 EMAIL_ALERT_ADDRESS = 'username@email.com' # your email address here
-MAIL_SERVER = 'mail@domain.com' # your mail server here
+MAIL_SERVER = 'mail.domain.com' # your mail server here
 SLEEP_SECONDS = 30 # seconds between API calls
 
 I18n.enforce_available_locales = false
