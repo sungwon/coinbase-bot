@@ -3,15 +3,17 @@ require 'coinbase' #gem 'coinbase'
 require 'mail' # gem 'mail'
 
 BUY_CEIL = Money.new(45000, "USD")
-SELL_FLOOR = Money.new(67000, "USD")
+SELL_FLOOR = Money.new(38262, "USD")
 AUTO_BUY = false
-AUTO_SELL = false
+AUTO_SELL = true
+BUY_ALERT = false
+SELL_ALERT = false
 BUY_QUANTITY = 1
-SELL_QUANTITY = 6.5995
+SELL_QUANTITY = 0.5000142
 
-EMAIL_ALERT_ADDRESS = 'username@email.com' # your email address here
-MAIL_SERVER = 'mail@domain.com' # your mail server here
-SLEEP_SECONDS = 30 # seconds between API calls
+EMAIL_ALERT_ADDRESS = 'dokkaebi@gmail.com' # your email address here
+MAIL_SERVER = 'mail.sungwonchoe.com' # your mail server here
+SLEEP_SECONDS = 60 # seconds between API calls
 
 I18n.enforce_available_locales = false
 
@@ -88,7 +90,7 @@ loop do
       coinbase.buy!(BUY_QUANTITY);
       send_notice(email_address, "Auto-buy at $#{buy_price}", "Auto-buy at $#{buy_price}")
       break
-    else
+    elsif BUY_ALERT
       logger.info "Buy Price ($#{buy_price}) below target ($#{BUY_CEIL}). Sending alert."
       send_notice(email_address, "Low buy price ($#{buy_price})", "Low buy price ($#{buy_price})")
       break
@@ -99,7 +101,7 @@ loop do
       coinbase.sell!(SELL_QUANTITY);
       send_notice(email_address, "Auto-sell at ($#{sell_price})", "Auto-sell at ($#{sell_price})")
       break
-    else  
+    elsif SELL_ALERT  
       logger.info "Sell Price ($#{sell_price}) above target ($#{SELL_FLOOR}). Sending alert."
       send_notice(email_address, "High sell price ($#{sell_price})", "High sell price ($#{sell_price})")
       break
