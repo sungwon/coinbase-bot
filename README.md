@@ -37,4 +37,11 @@ For the API key, you will have to enable one at Coinbase.com for your account an
 :api_key: stringoflettersandnumbers
 :api_secret: stringoflettersandnumbers
 ```
+
+This script depends on the <a href="https://github.com/coinbase/coinbase-ruby">coinbase-ruby gem</a>. You can install it in for your environment on the command line with:
+
+```
+gem install coinbase
+```
+
 Contact me with any questions.
