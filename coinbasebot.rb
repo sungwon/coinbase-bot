@@ -11,8 +11,8 @@ SELL_ALERT = false
 BUY_QUANTITY = 1
 SELL_QUANTITY = 0.5000142
 
-EMAIL_ALERT_ADDRESS = 'dokkaebi@gmail.com' # your email address here
-MAIL_SERVER = 'mail.sungwonchoe.com' # your mail server here
+EMAIL_ALERT_ADDRESS = 'youremail@email.com' # your email address here
+MAIL_SERVER = 'mail.yourmailserver.com' # your mail server here
 SLEEP_SECONDS = 60 # seconds between API calls
 
 I18n.enforce_available_locales = false
