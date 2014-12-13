@@ -2,8 +2,8 @@ require 'logger'
 require 'coinbase' #gem 'coinbase'
 require 'mail' # gem 'mail'
 
-BUY_CEIL = Money.new(45000, "USD")
-SELL_FLOOR = Money.new(38262, "USD")
+BUY_FLOOR = Money.new(45000, "USD")
+SELL_CEIL = Money.new(38262, "USD")
 AUTO_BUY = false
 AUTO_SELL = false
 BUY_ALERT = false
@@ -55,8 +55,8 @@ def send_notice(from, subject, body)
 end
 
 
-puts "Buy ceiling is at: " + BUY_CEIL.format
-puts "Sell floor is at : " + SELL_FLOOR.format
+puts "Buy ceiling is at: " + BUY_FLOOR.format
+puts "Sell floor is at : " + SELL_CEIL.format
 if AUTO_BUY 
   puts "Auto-buy is      : ON"
   puts "Buy quantity is  : #{BUY_QUANTITY}" 
@@ -94,27 +94,27 @@ while continue
   logger.debug "Sell Price: $ #{sell_price}"
   puts(Time.now.inspect + " | Total Buy Price: " + buy_price.format + " | Total Sell Price: " + sell_price.format) 
 
-  if buy_price <= BUY_CEIL
+  if buy_price <= BUY_FLOOR
     if AUTO_BUY
-      logger.info "Buy Price ($#{buy_price}) below target ($#{BUY_CEIL}). Buying automatically."
+      logger.info "Buy Price ($#{buy_price}) below target ($#{BUY_FLOOR}). Buying automatically."
       coinbase.buy!(BUY_QUANTITY);
       send_notice(email_address, "Auto-buy at $#{buy_price}", "Auto-buy at $#{buy_price}")
       break
     elsif BUY_ALERT
-      logger.info "Buy Price ($#{buy_price}) below target ($#{BUY_CEIL}). Sending alert."
+      logger.info "Buy Price ($#{buy_price}) below target ($#{BUY_FLOOR}). Sending alert."
       send_notice(email_address, "Low buy price ($#{buy_price})", "Low buy price ($#{buy_price})")
       break
     end
   end
   
-  if sell_price >= SELL_FLOOR
+  if sell_price >= SELL_CEIL
     if AUTO_SELL
-      logger.info "Sell Price ($#{sell_price}) above target ($#{SELL_FLOOR}). Selling automatically."
+      logger.info "Sell Price ($#{sell_price}) above target ($#{SELL_CEIL}). Selling automatically."
       coinbase.sell!(SELL_QUANTITY);
       send_notice(email_address, "Auto-sell at ($#{sell_price})", "Auto-sell at ($#{sell_price})")
       break
     elsif SELL_ALERT  
-      logger.info "Sell Price ($#{sell_price}) above target ($#{SELL_FLOOR}). Sending alert."
+      logger.info "Sell Price ($#{sell_price}) above target ($#{SELL_CEIL}). Sending alert."
       send_notice(email_address, "High sell price ($#{sell_price})", "High sell price ($#{sell_price})")
       break
     end
