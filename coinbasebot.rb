@@ -55,8 +55,8 @@ def send_notice(from, subject, body)
 end
 
 
-puts "Buy ceiling is at: " + BUY_FLOOR.format
-puts "Sell floor is at : " + SELL_CEIL.format
+puts "Buy floor is at: " + BUY_FLOOR.format
+puts "Sell ceiling is at : " + SELL_CEIL.format
 if AUTO_BUY 
   puts "Auto-buy is      : ON"
   puts "Buy quantity is  : #{BUY_QUANTITY}" 
